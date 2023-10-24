@@ -37,6 +37,7 @@ const renderStudents = () => {
         <span style="color: ${student.color}"> ${student.color}</span>
       </p>
       <button data-index="${index}" class="button-delete">Удалить</button>
+      <button data-index="${index}" class="button-delete-name">Стереть имя</button>
     </li>`;
   })
     .join("");
@@ -46,7 +47,8 @@ const renderStudents = () => {
   initEventListeners();
   colorEventListeners();
   initDeleteButtonsListeners();
-  isLoverListeners();
+  initDeleteNameButtonListeners();
+
 };
 
 
@@ -85,6 +87,21 @@ const initDeleteButtonsListeners = () => {
   }
 };
 
+const initDeleteNameButtonListeners = () => {
+  const deleteNameButtonElements = document.querySelectorAll('.button-delete-name');
+
+  for (const deleteNameButtonElement of deleteNameButtonElements) {
+    deleteNameButtonElement.addEventListener('click', () => {
+      console.log('Удаляю имя....');
+      const index = deleteNameButtonElement.dataset.index;
+      students[index].name = 'Неизвестный студент';
+      renderStudents();
+    });
+  }
+};
+
+
+
 const isLoverListeners = () => {
   for (student of students) {
     if (student.isLover === true) {
@@ -93,6 +110,7 @@ const isLoverListeners = () => {
   };
 };
 
+isLoverListeners();
 renderStudents();
 
 buttonElement.addEventListener("click", () => {
