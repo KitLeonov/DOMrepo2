@@ -33,8 +33,7 @@ const renderStudents = () => {
   const studentsHtml = students.map((student, index) => {
     return `<li class="student" data-color="${student.color}" data-name="${student.name}">
       <p class="student-name">
-        ${student.name}, любимый цвет
-        <span style="color: ${student.color}"> ${student.color}</span>
+        ${student.name}
       </p>
       <button data-index="${index}" class="button-delete">Удалить</button>
       <button data-index="${index}" class="button-delete-name">Стереть имя</button>
@@ -49,6 +48,19 @@ const renderStudents = () => {
   initDeleteButtonsListeners();
   initDeleteNameButtonListeners();
 
+  const studentsElements = document.querySelectorAll(".student");
+
+  for (const student of studentsElements) {
+    student.addEventListener("click", () => {
+      const color = student.dataset.color;
+      alert(`Любимый цвет, ${color}`);
+    });
+  }
+
+  const clickHtml = document.querySelector("html");
+  clickHtml.addEventListener("click", () => {
+    alert("Клик по html");
+  });
 };
 
 
@@ -86,6 +98,9 @@ const initDeleteButtonsListeners = () => {
     });
   }
 };
+
+
+
 
 const initDeleteNameButtonListeners = () => {
   const deleteNameButtonElements = document.querySelectorAll('.button-delete-name');
